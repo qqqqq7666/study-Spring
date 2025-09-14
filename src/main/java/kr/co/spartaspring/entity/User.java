@@ -1,7 +1,9 @@
 package kr.co.spartaspring.entity;
 
 import jakarta.persistence.*;
+import kr.co.spartaspring.dto.user.response.UserResponseDto;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -20,6 +22,7 @@ public class User {
     private String email;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
+    @Getter
     private UserRole role;
 
     @Builder
@@ -31,7 +34,11 @@ public class User {
         this.role = role;
     }
 
-    public void encodePassword(PasswordEncoder passwordEncoder) {
-        this.password = passwordEncoder.encode(password);
+    public UserResponseDto toResponse() {
+        return UserResponseDto.builder()
+                .username(username)
+                .email(email)
+                .role(role)
+                .build();
     }
 }

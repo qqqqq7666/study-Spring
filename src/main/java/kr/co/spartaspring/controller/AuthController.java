@@ -1,4 +1,4 @@
-package kr.co.spartaspring;
+package kr.co.spartaspring.controller;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     private final JwtUtil jwtUtil;
 
-    @GetMapping("/create-jwt")
+    @GetMapping("/creat-jwt")
     public String createJwt(HttpServletResponse response) {
         String token = jwtUtil.createToken("nada", UserRole.USER);
 

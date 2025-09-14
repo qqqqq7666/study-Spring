@@ -17,19 +17,26 @@
       var box = document.getElementById("admin-token");
 
       // If the checkbox is checked, display the output text
-      if (checkBox.checked == true){
+      if (checkBox.checked === true){
         box.style.display = "block";
+        checkBox.value = true;
       } else {
         box.style.display = "none";
+        checkBox.value = false;
       }
+    }
+
+    function onSubmit() {
+      const checkBox = document.getElementById("admin-check");
+      checkBox.value = checkBox.checked === true;
     }
   </script>
 </head>
 <body>
-<div id="login-form">
+<div id="login-form" onsubmit="onSubmit()">
   <div id="login-title">Sign up Select Shop</div>
 
-  <form action="/api/user/signup" method="post">
+  <form action="/api/user" method="post">
     <div class="login-id-label">Username</div>
     <input type="text" name="username" placeholder="Username" class="login-input-box">
 
@@ -40,10 +47,10 @@
     <input type="text" name="email" placeholder="E-mail" class="login-input-box">
 
     <div>
-      <input id="admin-check" type="checkbox" name="admin" onclick="onclickAdmin()" style="margin-top: 40px;">관리자
+      <input id="admin-check" type="checkbox" name="isAdmin" onclick="onclickAdmin()" style="margin-top: 40px;">관리자
       <input id="admin-token" type="password" name="adminToken" placeholder="관리자 암호" class="login-input-box" style="display:none">
     </div>
-    <button id="login-id-submit">회원 가입</button>
+    <button type="submit" id="login-id-submit">회원 가입</button>
   </form>
 </div>
 </body>
